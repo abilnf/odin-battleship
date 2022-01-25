@@ -2,7 +2,7 @@ const Ship = require("./ship");
 
 function Gameboard() {
   const board = [];
-  for (let i = 0; i < 100; i++) board.push(false);
+  for (let i = 0; i < 100; i++) board.push({});
 
   const isInBounds = (x, y) => x >= 0 && x < 10 && y >= 0 && y < 10;
   const placeAt = (x, y, value) => (board[y * 10 + x] = value);
@@ -18,7 +18,8 @@ function Gameboard() {
       if (!isInBounds(x, y)) return false;
       for (let dx = -1; dx <= 1; dx++) {
         for (let dy = -1; dy <= 1; dy++) {
-          if (typeof getAt(x + dx, y + dy) === "object") return false;
+          if (isInBounds(x + dx, y + dy) && getAt(x + dx, y + dy).ship)
+            return false;
         }
       }
       ({ x, y } = offset(x, y, direction));
@@ -38,23 +39,15 @@ function Gameboard() {
 
   const receiveAttack = (x, y) => {
     const obj = getAt(x, y);
-    if (!obj) {
-      placeAt(x, y, true);
-      return true;
-    }
-    if (obj === true) return false;
     if (obj.hit) return false;
     obj.hit = true;
-    obj.ship.hit(obj.position);
+    if (obj.ship) obj.ship.hit(obj.position);
     return true;
   };
 
   const hasLost = () => {
     return board.reduce(
-      (result, cell) =>
-        result &&
-        (typeof cell !== "object" ||
-          (typeof cell === "object" && cell.ship.isSunk())),
+      (result, cell) => result && (!cell.ship || cell.ship.isSunk()),
       true
     );
   };
