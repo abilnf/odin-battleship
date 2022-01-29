@@ -1,4 +1,4 @@
-const Ship = require("./ship");
+import "./ship";
 
 test("Ship double hit", () => {
   const ship = Ship(1);

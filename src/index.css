@@ -1,0 +1,38 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+:root {
+  --cell-size: 50px;
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 8px;
+}
+
+.board {
+  width: calc(var(--cell-size) * 10);
+  height: calc(var(--cell-size) * 10);
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.board button {
+  width: var(--cell-size);
+  height: var(--cell-size);
+  font-size: calc(var(--cell-size) * 0.6);
+  border: 1px solid black;
+}
