@@ -1,2 +1,8 @@
 import "./index.css";
-import display from "./game/display.js";
+const display = require("./game/display.js");
+const game = require("./game/game.js");
+
+display.reset();
+game.reset();
+display.updateEnemyBoard();
+display.updateUserBoard();

@@ -10,4 +10,4 @@ function Ship(length) {
   return { hit, isSunk };
 }
 
-export { Ship };
+module.exports = Ship;

@@ -3,5 +3,9 @@ const Gameboard = require("./gameboard");
 function Player() {
   const board = Gameboard();
 
-  return { board };
+  const isReady = () => board.isFull();
+
+  return { board, isReady };
 }
+
+module.exports = Player;
