@@ -1,0 +1,1 @@
+(()=>{"use strict";document.querySelectorAll(".board").forEach((e=>{for(let t=0;t<100;t++){const t=document.createElement("button");e.appendChild(t)}}))})();
